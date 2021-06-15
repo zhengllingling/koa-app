@@ -16,6 +16,11 @@ onerror(app)
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
+// 处理跨域
+app.use(async (ctx,next) => {
+  ctx.set("Access-Control-Allow-Origin", "*");
+  await next();
+})
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
